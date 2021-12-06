@@ -1,7 +1,0 @@
----
-channel: stable
-addons:
-  vscode:
-    repository: andigehle/addon-vscode
-    target: vscode
-    image: ghcr.io/hassio-addons/adguard/{arch}
