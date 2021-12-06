@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base/amd64:5.0.0
+ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base/armv7:5.0.0
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -18,7 +18,7 @@ COPY requirements.txt /tmp/requirements.txt
 COPY vscode.extensions /root/vscode.extensions
 
 # Setup base system
-ARG BUILD_ARCH=amd64
+ARG BUILD_ARCH=armv7
 # hadolint ignore=SC2181, DL3008
 RUN \
     apt-get update \
@@ -52,6 +52,7 @@ RUN \
     \
     && if [[ "${BUILD_ARCH}" = "aarch64" ]]; then ARCH="arm64"; fi \
     && if [[ "${BUILD_ARCH}" = "amd64" ]]; then ARCH="amd64"; fi \
+    && if [[ "${BUILD_ARCH}" = "armv7" ]]; then ARCH="armv7"; fi \
     && curl -J -L -o /tmp/code.tar.gz \
         "https://github.com/cdr/code-server/releases/download/v3.11.1/code-server-3.11.1-linux-${ARCH}.tar.gz" \
     && mkdir -p /usr/local/lib/code-server \
